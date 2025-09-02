@@ -1,3 +1,4 @@
+
 import pandas as pd
 import pytest
 from datasense.feature_importance import feature_importance_calculate
@@ -35,3 +36,4 @@ class TestFeatureImportance:
         
         with pytest.raises(ValueError, match="Target column 'nonexistent' not found"):
             feature_importance_calculate(df, 'nonexistent')
+EOF
