@@ -77,8 +77,6 @@ See practical examples and full workflows in the included Jupyter notebooks:
 - [Basic EDA Example](notebooks/Datasense_Library_Test_1.ipynb)
 - [Time-Series Example](notebooks/Datasense_Library_Test_2.ipynb)
 
-> 💡 **Pro Tip**: View the notebooks rendered nicely with [NbViewer](https://nbviewer.jupyter.org/).
-
 ---
 
 ## API Reference
