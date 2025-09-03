@@ -73,10 +73,7 @@ def feature_importance_calculate(
 
     # --- Detect target type ---
     if pd.api.types.is_numeric_dtype(y):
-        if y.nunique() <= 20:  
-            target_type = "classification"
-        else:
-            target_type = "regression"
+        target_type = "regression"
     else:
         target_type = "classification"
 
