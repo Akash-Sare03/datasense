@@ -183,4 +183,5 @@ def feature_importance_calculate(
     # Auto display in Jupyter
     display(Markdown(md_report))
 
-    return target_type
+    return importance_df, md_report, target_type
+
