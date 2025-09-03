@@ -1,5 +1,3 @@
-# Update the workflow to ensure tabulate is installed
-cat > .github/workflows/python-test.yml << 'EOF'
 name: Python Tests
 
 on: [push, pull_request]
