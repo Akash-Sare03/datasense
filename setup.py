@@ -5,12 +5,12 @@ import os
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-# Extract version from datasense/__init__.py
+# Extract version
 def get_version():
-    about = {}
-    with open(os.path.join("datasense", "__init__.py")) as f:
-        exec(f.read(), about)
-    return about["__version__"]
+    version_file = {}
+    with open("datasense/_version.py") as f:
+        exec(f.read(), version_file)
+    return version_file["__version__"]
 
 setup(
     name="datasense",

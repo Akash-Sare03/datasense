@@ -1,16 +1,4 @@
-# datasense/__init__.py
-
-# --- Version Handling (auto from package metadata) ---
-try:
-    from importlib.metadata import version, PackageNotFoundError
-except ImportError:  # for Python <3.8
-    from importlib_metadata import version, PackageNotFoundError
-
-try:
-    __version__ = version("datasense")
-except PackageNotFoundError:
-    __version__ = "unknown"
-
+from ._version import __version__
 
 # --- Public API Imports ---
 from .summary import summarize_dataset
