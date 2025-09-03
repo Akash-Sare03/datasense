@@ -1,7 +1,6 @@
 import pytest
 import pandas as pd
 from datasense.feature_importance import feature_importance_calculate
-from IPython.display import Markdown
 
 
 @pytest.fixture
@@ -23,24 +22,29 @@ def classification_df():
 
 
 def test_feature_importance_regression(regression_df):
-    report = feature_importance_calculate(regression_df, target_col="target")
-    assert isinstance(report, Markdown)
-    assert "Feature Importance" in str(report.data)
+    importance_df, report, task_type = feature_importance_calculate(regression_df, target_col="target")
+    assert isinstance(importance_df, pd.DataFrame)
+    assert "Feature" in importance_df.columns
+    assert "Importance" in importance_df.columns
+    assert "Feature Importance Report" in report
+    assert task_type == "regression"
 
 
 def test_feature_importance_classification(classification_df):
-    report = feature_importance_calculate(classification_df, target_col="target")
-    assert isinstance(report, Markdown)
-    assert "Feature Importance" in str(report.data)
+    importance_df, report, task_type = feature_importance_calculate(classification_df, target_col="target")
+    assert isinstance(importance_df, pd.DataFrame)
+    assert "Feature" in importance_df.columns
+    assert "Importance" in importance_df.columns
+    assert "Feature Importance Report" in report
+    assert task_type == "classification"
 
 
 def test_invalid_target_column(regression_df):
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError):
         feature_importance_calculate(regression_df, target_col="not_a_column")
 
 
 def test_empty_dataframe():
     df = pd.DataFrame()
-    report = feature_importance_calculate(df, target_col="target")
-    assert isinstance(report, Markdown)
-    assert "empty" in str(report.data).lower()
+    with pytest.raises(ValueError):
+        feature_importance_calculate(df, target_col="target")
