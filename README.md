@@ -1,6 +1,6 @@
 # datasense 📊
 
-![Tests](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml/badge.svg)
+[![Python Tests](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml/badge.svg)](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml)
 ![PyPI version](https://img.shields.io/pypi/v/datasense)
 ![Python](https://img.shields.io/pypi/pyversions/datasense)
 ![License](https://img.shields.io/github/license/Akash-Sare03/datasense)
