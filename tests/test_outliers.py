@@ -4,7 +4,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from IPython.display import Markdown
-from outliers import detect_outliers, remove_outliers, _to_dataframe
+from datasense.outliers import detect_outliers, remove_outliers, _to_dataframe
 
 
 # ---------- Fixtures ----------
