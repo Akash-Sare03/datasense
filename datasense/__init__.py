@@ -1,3 +1,18 @@
+# datasense/__init__.py
+
+# --- Version Handling (auto from package metadata) ---
+try:
+    from importlib.metadata import version, PackageNotFoundError
+except ImportError:  # for Python <3.8
+    from importlib_metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version("datasense")
+except PackageNotFoundError:
+    __version__ = "unknown"
+
+
+# --- Public API Imports ---
 from .summary import summarize_dataset
 from .stats import calculate_statistics
 from .recommendations import generate_recommendations
@@ -14,9 +29,10 @@ from .visualization import (
     plot_countplot,
     plot_correlation_matrix,
     plot_scatterplot,
-    plot_pairplot
+    plot_pairplot,
 )
 
+# --- Public API List ---
 __all__ = [
     "summarize_dataset",
     "calculate_statistics",
@@ -35,5 +51,5 @@ __all__ = [
     "plot_countplot",
     "plot_correlation_matrix",
     "plot_scatterplot",
-    "plot_pairplot"
+    "plot_pairplot",
 ]
