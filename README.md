@@ -1,18 +1,33 @@
 # datasense 📊
 
-A Python library for automated exploratory data analysis (EDA), data cleaning, and visualization. Built for for beginners and analysts to quickly understand and preprocess datasets.
+![Tests](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml/badge.svg)
+![PyPI version](https://img.shields.io/pypi/v/datasense)
+![Python](https://img.shields.io/pypi/pyversions/datasense)
+![License](https://img.shields.io/github/license/Akash-Sare03/datasense)
+
+A Python library for automated exploratory data analysis (EDA), data cleaning, and visualization. 
+Built for beginners and analysts to quickly understand and preprocess datasets.
 
 ---
 
-## Features
+## ✨ Features
 
-- **Dataset Summary**: Overview of shape, dtypes, missing values, duplicates.
-- **Missing Value Handling**: Detect and impute missing values (mean, median, mode, constant, drop).
-- **Outlier Detection**: Identify outliers using Z-score or IQR methods.
-- **Feature Importance**: Calculate and visualize feature importance for regression/classification.
-- **Time-Series Analysis**: Decomposition, rolling statistics, and trend detection.
-- **Visualizations**: Histograms, boxplots, count plots, correlation matrices, scatter plots, pair plots.
-- **Automated Recommendations**: Get actionable insights for data preprocessing.
+- **Dataset Summary**: Overview of shape, dtypes, missing values, duplicates.  
+- **Missing Value Handling**: Detect and impute missing values (mean, median, mode, constant, drop).  
+- **Outlier Detection**: Identify outliers using Z-score or IQR methods.  
+- **Feature Importance**: Calculate and visualize feature importance for regression/classification.  
+- **Time-Series Analysis**: Decomposition, rolling statistics, and trend detection.  
+- **Visualizations**: Histograms, boxplots, count plots, correlation matrices, scatter plots, pair plots.  
+- **Automated Recommendations**: Get actionable insights for data preprocessing.  
+
+---
+
+## 🚀 Why Datasense?
+
+- ⚡ One-line automated EDA for quick dataset understanding.  
+- 🧹 Built-in cleaning and preprocessing to save time.  
+- 📊 Visual + tabular insights, ready for analysis or ML pipelines.  
+- 🔧 Beginner-friendly but powerful enough for production workflows.  
 
 ---
 
@@ -22,8 +37,10 @@ A Python library for automated exploratory data analysis (EDA), data cleaning, a
 git clone https://github.com/Akash-Sare03/datasense.git
 cd datasense
 pip install -r requirements.txt
-```
 
+Or install from PyPI: 
+pip install datasense
+```
 ---
 
 ## Quick Start
@@ -33,6 +50,8 @@ import pandas as pd
 from datasense import analyze
 
 df = pd.read_csv("your_data.csv")
+
+# Run a full EDA
 analyze(df, target_col="price")
 ```
 
@@ -58,7 +77,8 @@ df_clean, report = handle_missing_values(df, method="mean")
 ```python
 from datasense import feature_importance_calculate
 
-target_type = feature_importance_calculate(df, target_col="target", top_n=10)
+fi_df, markdown_report, task_type = feature_importance_calculate(df, target_col="target", top_n=10)
+print(markdown_report)
 ```
 
 ### Time-Series Analysis
@@ -76,8 +96,6 @@ See practical examples and full workflows in the included Jupyter notebooks:
 
 - [Basic EDA Example](notebooks/Datasense_Library_Test_1.ipynb)
 - [Time-Series Example](notebooks/Datasense_Library_Test_2.ipynb)
-
-> 💡 **Pro Tip**: View the notebooks rendered nicely with [NbViewer](https://nbviewer.jupyter.org/).
 
 ---
 
@@ -106,7 +124,7 @@ See practical examples and full workflows in the included Jupyter notebooks:
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for details.
 
 ---
 
