@@ -37,7 +37,7 @@ cd datasense
 pip install -r requirements.txt
 
 Or install from PyPI: 
-pip install datasense
+pip install datasense-eda
 ```
 ---
 
@@ -131,7 +131,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for d
 This package is available on PyPI. Install it via:
 
 ```bash
-pip install datasense
+pip install datasense-eda
 ```
 
 Or deploy locally:
