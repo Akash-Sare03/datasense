@@ -189,11 +189,12 @@ def remove_outliers(
 
         elif method.lower() == 'zscore':
             for col in df_clean.select_dtypes(include='number').columns:
-                z_scores = zscore(df_clean[col].dropna())
+                z_scores = pd.Series(zscore(df_clean[col].dropna()), index=df_clean[col].dropna().index)
                 mask = abs(z_scores) < threshold
+                mask = mask.reindex(df_clean.index, fill_value=False)
                 if strategy == "remove":
                     before = len(df_clean)
-                    df_clean = df_clean[mask.reindex(df_clean.index, fill_value=False)]
+                    df_clean = df_clean[mask]
                     after = len(df_clean)
                     explanation.append(f"- **{col}**: Removed {before - after} rows (Z-score threshold={threshold})")
                 elif strategy == "cap":
