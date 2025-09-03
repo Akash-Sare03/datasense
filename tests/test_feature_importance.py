@@ -1,44 +1,46 @@
-import pandas as pd
 import pytest
+import pandas as pd
 from datasense.feature_importance import feature_importance_calculate
+from IPython.display import Markdown
 
 
-class TestFeatureImportance:
-    """Test suite for feature_importance.py"""
+@pytest.fixture
+def regression_df():
+    return pd.DataFrame({
+        "feature1": [1, 2, 3, 4, 5, 6],
+        "feature2": [2, 4, 6, 8, 10, 12],
+        "target":   [5, 10, 15, 20, 25, 30],  # Numeric target → regression
+    })
 
-    def test_feature_importance_classification(self):
-        """Test with classification data"""
-        df = pd.DataFrame({
-            'feature1': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            'feature2': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-            'target': [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]  # Binary classification
-        })
 
-        importance_df, report, target_type = feature_importance_calculate(df, 'target', top_n=2)
+@pytest.fixture
+def classification_df():
+    return pd.DataFrame({
+        "feature1": [1, 2, 1, 2, 3, 3],
+        "feature2": [10, 20, 30, 10, 20, 30],
+        "target":   ["A", "A", "B", "B", "C", "C"],  # Categorical target → classification
+    })
 
-        # Validate outputs
-        assert target_type == "classification"
-        assert isinstance(report, str)
-        assert not importance_df.empty
 
-    def test_feature_importance_regression(self):
-        """Test with regression data"""
-        df = pd.DataFrame({
-            'feature1': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            'feature2': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-            'target': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]  # Regression
-        })
+def test_feature_importance_regression(regression_df):
+    report = feature_importance_calculate(regression_df, target_col="target")
+    assert isinstance(report, Markdown)
+    assert "Feature Importance" in str(report.data)
 
-        importance_df, report, target_type = feature_importance_calculate(df, 'target', top_n=2)
 
-        # Validate outputs
-        assert target_type == "regression"
-        assert isinstance(report, str)
-        assert not importance_df.empty
+def test_feature_importance_classification(classification_df):
+    report = feature_importance_calculate(classification_df, target_col="target")
+    assert isinstance(report, Markdown)
+    assert "Feature Importance" in str(report.data)
 
-    def test_feature_importance_missing_target(self):
-        """Test with missing target column"""
-        df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
 
-        with pytest.raises(ValueError, match="Target column 'nonexistent' not found"):
-            feature_importance_calculate(df, 'nonexistent')
+def test_invalid_target_column(regression_df):
+    with pytest.raises(KeyError):
+        feature_importance_calculate(regression_df, target_col="not_a_column")
+
+
+def test_empty_dataframe():
+    df = pd.DataFrame()
+    report = feature_importance_calculate(df, target_col="target")
+    assert isinstance(report, Markdown)
+    assert "empty" in str(report.data).lower()
