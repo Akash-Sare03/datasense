@@ -20,8 +20,13 @@ This guide provides detailed usage instructions with examples.
 - [Best Practices](#-best-practices)
 - [Troubleshooting](#-troubleshooting)
 
+---
+
 # 🚀 Installation
+
 ### pip install datasense-eda
+
+---
 
 # ⚡ Quick Start
 
@@ -40,6 +45,8 @@ from ds.summary import summarize_dataset
 summary = summarize_dataset(df)
 print(summary)
 ```
+---
+
 # Core Functions
 ## 1. Dataset Summary
 ```python
