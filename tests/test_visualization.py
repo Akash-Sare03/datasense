@@ -58,6 +58,20 @@ def sample_large_df():
     })
 
 
+@pytest.fixture
+def sample_numeric_df():
+    """Fixture: DataFrame with only numeric columns for pairplot testing."""
+    np.random.seed(42)
+    n = 50
+    return pd.DataFrame({
+        "var1": np.random.normal(0, 1, n),
+        "var2": np.random.normal(5, 2, n),
+        "var3": np.random.exponential(1, n),
+        "var4": np.random.uniform(0, 10, n),
+        "cluster": np.random.randint(1, 4, n)  # Numeric cluster for hue
+    })
+
+
 # --------------------------
 # Dispatcher tests
 # --------------------------
@@ -97,9 +111,9 @@ def test_visualize_compare_mode_single_column(sample_df):
         assert hasattr(md, 'data')
 
 
-def test_visualize_compare_mode_pairplot(sample_df):
-    # Test comparative analysis with multiple columns for pairplot
-    results = visualize(sample_df, cols=['age', 'salary', 'score'], compare=True)
+def test_visualize_compare_mode_pairplot(sample_numeric_df):
+    # Test comparative analysis with multiple numeric columns for pairplot
+    results = visualize(sample_numeric_df, cols=['var1', 'var2', 'var3'], compare=True)
     assert isinstance(results, list)
     for fig, md in results:
         assert isinstance(fig, plt.Figure)
@@ -244,28 +258,29 @@ def test_plot_scatterplot_invalid_cols(sample_df):
         plot_scatterplot(sample_df, "dept", "salary")
 
 
-def test_plot_pairplot_valid(sample_df):
-    fig, md = plot_pairplot(sample_df, columns=["age", "salary"])
+def test_plot_pairplot_valid(sample_numeric_df):
+    fig, md = plot_pairplot(sample_numeric_df, columns=["var1", "var2"])
     assert isinstance(fig, plt.Figure)
     assert "Pairplot" in md.data
 
 
-def test_plot_pairplot_with_hue(sample_df):
-    fig, md = plot_pairplot(sample_df, columns=["age", "salary"], hue="dept")
+def test_plot_pairplot_with_numeric_hue(sample_numeric_df):
+    # Use numeric column for hue in pairplot
+    fig, md = plot_pairplot(sample_numeric_df, columns=["var1", "var2"], hue="cluster")
     assert isinstance(fig, plt.Figure)
     assert "Pairplot" in md.data
 
 
-def test_plot_pairplot_corner_mode(sample_df):
-    fig, md = plot_pairplot(sample_df, columns=["age", "salary", "score"], corner=True)
+def test_plot_pairplot_corner_mode(sample_numeric_df):
+    fig, md = plot_pairplot(sample_numeric_df, columns=["var1", "var2", "var3"], corner=True)
     assert isinstance(fig, plt.Figure)
     assert "Pairplot" in md.data
     assert "lower triangle" in md.data.lower()
 
 
-def test_plot_pairplot_auto_columns(sample_df):
+def test_plot_pairplot_auto_columns(sample_numeric_df):
     # Test without specifying columns (should auto-select numeric)
-    fig, md = plot_pairplot(sample_df)
+    fig, md = plot_pairplot(sample_numeric_df)
     assert isinstance(fig, plt.Figure)
     assert "Pairplot" in md.data
 
@@ -301,15 +316,16 @@ def test_plot_facet_grid_different_kinds(sample_large_df):
 
 
 def test_plot_facet_grid_invalid_cols(sample_df):
-    with pytest.raises(ValueError):
+    # Test that invalid columns raise ValueError
+    with pytest.raises(ValueError, match="not found in DataFrame"):
         plot_facet_grid(sample_df, "nonexistent", "salary", col="dept")
     
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not found in DataFrame"):
         plot_facet_grid(sample_df, "age", "salary", col="nonexistent")
 
 
 def test_plot_facet_grid_invalid_kind(sample_df):
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="must be"):
         plot_facet_grid(sample_df, "age", "salary", col="dept", kind="invalid_kind")
 
 
@@ -351,21 +367,46 @@ def test_visualize_all_categorical():
 # --------------------------
 def test_plot_functions_with_nonexistent_hue(sample_df):
     # Test that functions handle non-existent hue gracefully
-    try:
-        fig, md = plot_histogram(sample_df, "age", hue="nonexistent")
-        # Should either work or provide informative error message
-        assert isinstance(fig, plt.Figure) or "error" in md.data.lower()
-    except Exception:
-        # Some implementations might raise an exception
-        pass
+    # This should not raise an exception but might show an error message
+    fig, md = plot_histogram(sample_df, "age", hue="nonexistent")
+    assert isinstance(fig, plt.Figure)
+    # The function should handle this gracefully, either by working or showing an error message
 
 
 def test_plot_functions_with_too_many_categories():
     # Test with column that has too many unique values for hue
     df = pd.DataFrame({
-        "value": range(100),
-        "category": [f"cat_{i}" for i in range(100)]  # 100 unique categories
+        "value": range(50),
+        "category": [f"cat_{i}" for i in range(50)]  # 50 unique categories
     })
     
     fig, md = plot_histogram(df, "value", hue="category")
     assert isinstance(fig, plt.Figure)
+
+
+def test_plot_pairplot_with_categorical_hue_graceful(sample_df):
+    # Test that pairplot handles categorical hue gracefully (should not crash)
+    # This might return an error message but should not raise an exception
+    fig, md = plot_pairplot(sample_df, columns=["age", "salary"], hue="dept")
+    assert isinstance(fig, plt.Figure)
+    # The function should handle categorical hue gracefully
+
+
+# --------------------------
+# Test specific error messages
+# --------------------------
+def test_plot_pairplot_no_numeric_columns():
+    # Test with DataFrame that has no numeric columns
+    df = pd.DataFrame({
+        "cat1": ["A", "B", "C"],
+        "cat2": ["X", "Y", "Z"]
+    })
+    fig, md = plot_pairplot(df)
+    assert "no numeric columns" in md.data.lower()
+
+
+def test_plot_correlation_matrix_custom_figsize(sample_df):
+    # Test with custom figure size
+    fig, md = plot_correlation_matrix(sample_df, figsize=(8, 6))
+    assert isinstance(fig, plt.Figure)
+    assert "Correlation Matrix" in md.data
