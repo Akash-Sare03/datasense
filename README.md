@@ -2,7 +2,7 @@
 
 [![Python Tests](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml/badge.svg)](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml)
 
-[[Documentation](https://github.com/Akash-Sare03/datasense/documentation.md)]
+[[Documentation](https://github.com/Akash-Sare03/datasense/blob/main/documentation.md)]
 
 
 A Python library for automated exploratory data analysis (EDA), data cleaning, and visualization. 
@@ -59,8 +59,8 @@ analyze(df, target_col="price")
 
 ## Usage Examples
 
-### Basic EDA Report
-[[Documentation](https://github.com/Akash-Sare03/datasense/documentation.md)]
+### How to use
+[[Documentation](https://github.com/Akash-Sare03/datasense/blob/main/documentation.md)]
 
 ## Example Notebooks
 

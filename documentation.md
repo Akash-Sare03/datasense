@@ -21,7 +21,7 @@ This guide provides detailed usage instructions with examples.
 - [Troubleshooting](#-troubleshooting)
 
 # 🚀 Installation
-pip install datasense-eda
+### pip install datasense-eda
 
 # ⚡ Quick Start
 
