@@ -48,6 +48,27 @@ print(summary)
 ---
 
 # Core Functions
+```
+from datasense.summary import summarize_dataset
+from datasense.stats import calculate_statistics
+from datasense.recommendations import generate_recommendations
+from datasense.outliers import detect_outliers, remove_outliers
+from datasense.missing_values import find_missing_values, handle_missing_values
+from datasense.feature_importance import feature_importance_calculate
+from datasense.analyze_data import analyze
+from datasense.timeseries import analyze_timeseries
+from datasense.visualization import (
+    visualize,
+    plot_missing_values,
+    plot_histogram,
+    plot_boxplot,
+    plot_countplot,
+    plot_correlation_matrix,
+    plot_scatterplot,
+    plot_pairplot,
+)
+```
+
 ## 1. Dataset Summary
 ```python
 summarize_dataset(data, include_sample=True, sample_rows=5)

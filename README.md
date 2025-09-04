@@ -47,7 +47,7 @@ pip install datasense-eda
 
 ```python
 import pandas as pd
-from datasense import analyze
+from datasense.analyze_data import analyze
 
 df = pd.read_csv("your_data.csv")
 
