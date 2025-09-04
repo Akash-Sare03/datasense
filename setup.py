@@ -13,7 +13,7 @@ def get_version():
     return version_file["__version__"]
 
 setup(
-    name="datasense",
+    name="datasense-eda",
     version=get_version(),  # synced with __init__.py
     author="Akash Sare",
     author_email="akashsare03@gmail.com",
