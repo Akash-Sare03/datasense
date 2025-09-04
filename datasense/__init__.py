@@ -11,16 +11,13 @@ from .analyze_data import analyze
 from .timeseries import analyze_timeseries
 from .visualization import (
     visualize,
+    plot_missing_values,
     plot_histogram,
     plot_boxplot,
     plot_countplot,
-    plot_violinplot,
-    plot_stacked_barplot,
-    plot_missing_values,
     plot_correlation_matrix,
     plot_scatterplot,
     plot_pairplot,
-    plot_facet_grid,
 )
 
 # --- Public API List ---
@@ -43,7 +40,4 @@ __all__ = [
     "plot_correlation_matrix",
     "plot_scatterplot",
     "plot_pairplot",
-    "plot_violinplot",
-    "plot_stacked_barplot",
-    "plot_facet_grid"
 ]
