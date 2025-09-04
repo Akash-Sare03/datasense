@@ -2,6 +2,8 @@
 
 [![Python Tests](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml/badge.svg)](https://github.com/Akash-Sare03/datasense/actions/workflows/python-test.yml)
 
+[![Documentation](https://github.com/Akash-Sare03/datasense/documentation.md)]
+
 
 A Python library for automated exploratory data analysis (EDA), data cleaning, and visualization. 
 Built for beginners and analysts to quickly understand and preprocess datasets.
@@ -58,35 +60,7 @@ analyze(df, target_col="price")
 ## Usage Examples
 
 ### Basic EDA Report
-```python
-from datasense import analyze
-
-analyze(df, target_col="price", outlier_method="zscore")
-```
-
-### Handle Missing Values
-```python
-from datasense import handle_missing_values
-
-df_clean, report = handle_missing_values(df, method="mean")
-```
-
-### Feature Importance
-```python
-from datasense import feature_importance_calculate
-
-fi_df, markdown_report, task_type = feature_importance_calculate(df, target_col="target", top_n=10)
-print(markdown_report)
-```
-
-### Time-Series Analysis
-```python
-from datasense import analyze_timeseries
-
-analyze_timeseries(df, date_col="date", target_col="sales", freq="D")
-```
-
----
+[![Documentation](https://github.com/Akash-Sare03/datasense/documentation.md)]
 
 ## Example Notebooks
 
