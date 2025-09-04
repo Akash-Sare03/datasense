@@ -48,7 +48,10 @@ print(summary)
 ---
 
 # Core Functions
-```
+
+## All modules: 
+
+```python
 from datasense.summary import summarize_dataset
 from datasense.stats import calculate_statistics
 from datasense.recommendations import generate_recommendations
