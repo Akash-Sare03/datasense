@@ -4,38 +4,21 @@ A Python library for explainable and automated Exploratory Data Analysis (EDA).
 This guide provides detailed usage instructions with examples.
 
 📌 Table of Contents
-
-Installation
-
-Quick Start
-
-Core Functions
-
-1. Dataset Summary
-
-2. Statistical Analysis
-
-3. Missing Values Handling
-
-4. Outlier Detection and Handling
-
-5. Feature Importance
-
-6. Automated Recommendations
-
-7. Comprehensive Analysis
-
-8. Time Series Analysis
-
-9. Visualization Functions
-
-Complete Example Workflow
-
-Advanced Usage
-
-Best Practices
-
-Troubleshooting
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Core Functions](#core-functions)
+  - [Dataset Summary](#1-dataset-summary)
+  - [Statistical Analysis](#2-statistical-analysis)
+  - [Missing Values Handling](#3-missing-values-handling)
+  - [Outlier Detection and Handling](#4-outlier-detection-and-handling)
+  - [Feature Importance](#5-feature-importance)
+  - [Automated Recommendations](#6-automated-recommendations)
+  - [Comprehensive Analysis](#7-comprehensive-analysis)
+  - [Time Series Analysis](#8-time-series-analysis)
+  - [Visualization Functions](#9-visualization-functions)
+- [Complete Example Workflow](#complete-example-workflow)
+- [Best Practices](#-best-practices)
+- [Troubleshooting](#-troubleshooting)
 
 # 🚀 Installation
 pip install datasense-eda
@@ -57,7 +40,7 @@ from ds.summary import summarize_dataset
 summary = summarize_dataset(df)
 print(summary)
 ```
-# 🔑 Core Functions
+# Core Functions
 ## 1. Dataset Summary
 ```python
 summarize_dataset(data, include_sample=True, sample_rows=5)
@@ -219,7 +202,7 @@ fig, md = ds.plot_scatterplot(df, x='age', y='salary')
 fig, md = ds.plot_pairplot(df, columns=['age', 'salary'])
 ```
 
-# 🛠 Complete Example Workflow
+# Complete Example Workflow
 #### Let’s walk through a full EDA workflow using DataSense on a sample dataset.
 ```python
 import datasense as ds
@@ -290,7 +273,7 @@ print("\n9. Comprehensive Analysis Report:")
 ds.analyze(df_clean)
 ```
 
-# ✅ Best Practices
+#  Best Practices
 
 -> Always check for missing values
 
@@ -300,7 +283,7 @@ ds.analyze(df_clean)
 
 -> Save reports/visualizations for documentation
 
-# 🐞 Troubleshooting
+#  Troubleshooting
 
 Common Issues
 
