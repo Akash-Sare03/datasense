@@ -300,41 +300,17 @@ print(recommendations)
 
 # 8. Visualizations
 print("\n8. Generating Visualizations:")
+# Now supports x, y, hue for comparative plots
 plots = ds.visualize(df_clean, cols=['age', 'income', 'department'])
+
+# Example: Scatterplot with hue
+fig, md = ds.plot_scatterplot(df_clean, x='age', y='income', hue='department')
+
+# Example: Pairplot with hue
+fig, md = ds.plot_pairplot(df_clean, columns=['age', 'income', 'experience'], hue='department')
 
 # 9. Comprehensive analysis
 print("\n9. Comprehensive Analysis Report:")
 ds.analyze(df_clean)
-```
 
-#  Best Practices
-
--> Always check for missing values
-
--> Handle outliers based on domain knowledge
-
--> Use sampling for large datasets
-
--> Save reports/visualizations for documentation
-
-#  Troubleshooting
-
-Common Issues
-
-Empty dataset → check if DataFrame loaded
-
-Column not found → verify column names
-
-Memory errors → sample large datasets
-
-Visualization issues → check matplotlib / seaborn install
-
-# Debug Example
-```python
-try:
-    result = ds.analyze(df)
-except Exception as e:
-    print(f"Error: {e}")
-    print(f"Dataset shape: {df.shape}")
-    print(f"Columns: {df.columns.tolist()}")
 ```
