@@ -8,7 +8,7 @@ from .outliers import detect_outliers, remove_outliers
 from .missing_values import find_missing_values, handle_missing_values
 from .feature_importance import feature_importance_calculate
 from .analyze_data import analyze
-from .timeseries import analyze_timeseries
+from .timeseries import analyze_timeseries  
 from .visualization import (
     visualize,
     plot_missing_values,
