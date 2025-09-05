@@ -206,7 +206,10 @@ ds.analyze_timeseries(df, date_col, target_col, freq="D", window=7)
 
 ## 9. Visualization Functions
 ```python
-plots = ds.visualize(df, cols=None, save_plots=False)
+plots = ds.visualize(df,
+    cols=['age', 'income', 'department'],  # choose columns (numeric + categorical)
+    save_plots=False
+)
 
 
 #individual Plot Examples
@@ -227,10 +230,10 @@ fig, md = ds.plot_countplot(df, 'department')
 fig, md = ds.plot_correlation_matrix(df)
 
 # Scatter plot
-fig, md = ds.plot_scatterplot(df, x='age', y='salary')
+fig, md = ds.plot_scatterplot(df, x='age', y='salary', hue='department')
 
 # Pair plot
-fig, md = ds.plot_pairplot(df, columns=['age', 'salary'])
+fig, md = ds.plot_pairplot(df, columns=['age', 'salary', 'income'], hue='department')
 ```
 
 # Complete Example Workflow
